@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OKB Patient Portal</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/PatientPage.css">
+</head>
+
+<body>
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/pages/patient.js"></script>
+
+
+  <div class="title-container">
+    <img src="images/OKB_logoLarge.jpg" alt="Logo" class="logo">
+    <h1>OKB Patient Portal</h1>
+  </div>
+
+  <div class="sidebar">
+    <button data-tab="dashboard" class="active">Dashboard</button>
+    <button data-tab="careplan">Care Plan</button>
+    <button data-tab="visits">Visit Records</button>
+    <button data-tab="education">Health Education</button>
+    <button data-tab="logout">Logout</button>
+  </div>
+
+  <div class="main-content">
+    <div id="dashboard" class="tab-content active">
+      <?php render_view('patient/patient_dashboard', $data); ?>
+    </div>
+
+    <div id="careplan" class="tab-content">
+      <?php render_view('patient/patient_careplan', $data); ?>
+    </div>
+
+    <div id="visits" class="tab-content">
+      <?php render_view('patient/patient_records', $data); ?>
+    </div>
+
+    <div id="education" class="tab-content">
+      <?php render_view('patient/patient_education', $data); ?>
+    </div>
+  </div>
+
+</body>
+</html>
