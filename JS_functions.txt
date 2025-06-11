@@ -1,0 +1,63 @@
+
+
+
+function renderPast_Medications(medications = []) {
+
+  const list = document.getElementById("past-medications-list");
+  const emptyMsg = document.getElementById("no-past-medications-msg");
+
+
+
+  // If no meds, show message and stop
+  if (medications.length === 0) {
+    emptyMsg.style.display = "block";
+    return;
+  }
+
+  // If meds exist, hide the message
+  emptyMsg.style.display = "none";
+
+  // Render meds safely
+  medications.forEach(med => {
+    const li = document.createElement("li");
+
+    const strong = document.createElement("strong");
+    strong.textContent = med.medication_name;
+
+    li.appendChild(strong);
+    li.append(` Dosage: ${med.dosage}, Frequency: ${med.frequency},  Pill count: ${med.pill_count}`);
+
+    list.appendChild(li);
+  });
+}
+
+
+
+
+
+
+
+
+//Note: API endpoint paths have been renamed to generic routes for privacy and to avoid disclosing backend structure.
+
+ document.getElementById('prescription-order').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent full page reload
+
+    const prescription_order = event.target;
+    const Save_prescription_data = new FormData(prescription_order);
+
+    fetch('/api/prescriptions', {
+    method: 'POST',
+    body: Save_prescription_data
+    });
+
+
+        const result = await response.text();
+
+
+        prescription_order.reset(); 
+    } catch (error) {
+        document.getElementById('responseMessage').innerText = 'Error submitting vitals.';
+        console.error('Submission failed', error);
+    }
+});
